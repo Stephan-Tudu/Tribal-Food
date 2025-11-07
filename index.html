@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+  <title>VAN BHOJ — Tribal Foods Marketplace</title>
+   
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="logo">VB</div>
+      <div>
+        <div style="font-weight:800">VAN BHOJ</div>
+        <div style="font-size:12px;color:#555">Tribal Foods Marketplace</div>
+      </div>
+    </div>
+
+    <nav>
+      <button class="btn" id="menuBtn">Menu</button>
+      <button class="btn" id="aboutBtn">About</button>
+      <button class="btn cta" id="loginBtn">Login</button>
+      <button class="cart-btn" id="cartBtn">🛒 Cart <span id="cartCount" class="cart-count">0</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div>
+        <h1>Discover Authentic Tribal Flavors</h1>
+        <p>Explore tribal recipes from across India — millets, smoked meats, fermented rice, forest herbs and more. Each dish has a story.</p>
+        <div style="margin-top:18px">
+          <button class="btn cta" id="exploreBtn">Explore Menu</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img src="Images/Main-image.png" alt="Nature & Food (replace image)">
+      </div>
+    </section>
+
+    <section id="menuSection" aria-label="menu section">
+      <div class="section-title"><h2>Our Tribal Menu</h2></div>
+
+      <div class="tabs" id="tabs"></div>
+
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <section id="aboutSection">
+      <div class="section-title"><h2>About & Project Team</h2></div>
+      <div class="about-card">
+        <p>VAN BHOJ is a student project that showcases tribal food traditions from many Indian states. It is created to celebrate diverse culinary heritage and present an e-commerce style demo for tribal products and dishes.</p>
+
+        <h3 style="margin-top:12px;text-align:center">Project Members — CSE 5th Semester</h3>
+        <div class="team-list">
+          <div>1. Alka Kumari</div>
+          <div>2. Angel Gupta</div>
+          <div>3. Alok Mishra</div>
+          <div>4. Samuel Murmu</div>
+          <div>5. Stephan Tudu</div>
+        </div>
+
+        <p style="text-align:center;margin-top:12px"><strong>Branch:</strong> CSE (5th Sem) — <strong>Government Polytechnic, Dhanbad</strong></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="text-align:center;padding:20px 12px;color:#fff;background:linear-gradient(90deg,var(--green2),var(--accent2))">
+    © 2025 VAN BHOJ — Tribal Food Marketplace
+  </footer>
+
+  <!-- Preview modal -->
+  <div class="overlay" id="previewOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="close" onclick="closePreview()">✕</button>
+      <img id="previewImg" src="" alt="dish" style="width:100%;height:260px;border-radius:8px;object-fit:cover;margin-bottom:10px">
+      <h3 id="previewName"></h3>
+      <div style="color:#666;margin-bottom:6px" id="previewState"></div>
+      <div style="font-weight:800;color:var(--accent2);margin-bottom:12px" id="previewPrice"></div>
+      <p id="previewDesc" style="color:#444;margin-bottom:16px">Traditional tribal recipe.</p>
+      <div style="display:flex;gap:10px">
+        <button class="btn preview-btn" onclick="closePreview()">Close</button>
+        <button class="btn add-btn" id="previewAddBtn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart panel -->
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true">
+    <header>
+      <strong style="font-size:18px">Your Cart</strong>
+      <div>
+        <button class="btn btn-outline" id="cartClose">Close</button>
+      </div>
+    </header>
+
+    <div class="cart-items" id="cartItems">
+      <!-- dynamic -->
+    </div>
+
+    <div class="cart-summary">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+        <div style="font-weight:700">Total</div>
+        <div style="font-weight:800;font-size:18px">₹<span id="cartTotal">0</span></div>
+      </div>
+      <div class="cart-actions" style="margin-top:12px">
+        <button class="btn-outline" onclick="clearCart()">Clear</button>
+        <button class="btn cta" id="checkoutBtn">Checkout</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Checkout modal -->
+  <div class="overlay" id="checkoutOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="close" onclick="closeCheckout()">✕</button>
+      <h3>Checkout — Place Order</h3>
+      <div style="margin-top:8px">
+        <label style="font-weight:600;font-size:14px">Name</label>
+        <input id="custName" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #ddd" placeholder="Full name">
+      </div>
+      <div style="margin-top:8px">
+        <label style="font-weight:600;font-size:14px">Phone</label>
+        <input id="custPhone" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #ddd" placeholder="Mobile number">
+      </div>
+      <div style="margin-top:8px">
+        <label style="font-weight:600;font-size:14px">Address</label>
+        <textarea id="custAddr" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #ddd" rows="3" placeholder="Delivery address"></textarea>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btn preview-btn" onclick="closeCheckout()">Cancel</button>
+        <button class="btn add-btn" onclick="placeOrder()">Place Order</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login modal -->
+  <div class="overlay" id="loginOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="close" onclick="closeLogin()">✕</button>
+      <h3>Login</h3>
+      <div style="margin-top:8px">
+        <input id="loginEmail" placeholder="you@example.com" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd">
+      </div>
+      <div style="margin-top:8px">
+        <input id="loginPass" type="password" placeholder="password" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd">
+      </div>
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btn preview-btn" onclick="closeLogin()">Cancel</button>
+        <button class="btn add-btn" onclick="doLogin()">Login</button>
+      </div>
+    </div>
+  </div>
+
+<script src="script.js">
+
+</script>
+</body>
+</html>
